@@ -1,0 +1,55 @@
+baseURL = "https://dongit1005-netizen.github.io/"
+languageCode = "zh-cn"
+title = "DOITSPACE"
+theme = "PaperMod"
+
+[params]
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowToc = true
+  ShowCodeCopyButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  ShowShareButtons = false
+  ShowFullTextinRSS = true
+  mainSections = ["posts"]
+
+[params.homeInfoParams]
+  Title = "DOITSPACE"
+  Content = "这里是董祎特的个人博客。记录学习笔记、项目经历、阅读感受和阶段性的自我整理。"
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/dongit1005-netizen"
+
+[[menu.main]]
+  identifier = "posts"
+  name = "文章"
+  url = "/posts/"
+  weight = 10
+
+[[menu.main]]
+  identifier = "categories"
+  name = "分类"
+  url = "/categories/"
+  weight = 20
+
+[[menu.main]]
+  identifier = "tags"
+  name = "标签"
+  url = "/tags/"
+  weight = 30
+
+[[menu.main]]
+  identifier = "archives"
+  name = "归档"
+  url = "/archives/"
+  weight = 40
+
+[[menu.main]]
+  identifier = "about"
+  name = "关于"
+  url = "/about/"
+  weight = 50
