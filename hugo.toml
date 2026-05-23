@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313/"
+baseURL = "https://dongit1005-netizen.github.io/"
 languageCode = "zh-cn"
 title = "我的博客"
 theme = "PaperMod"
