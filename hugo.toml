@@ -18,8 +18,11 @@ theme = "hugo-theme-stack"
 
 [params.sidebar]
   emoji = ""
-  subtitle = "记录学习、项目、阅读与阶段性的自我整理。"
-  avatar = ""
+  subtitle = "昨天已经过去，明天还未到来，今天仍是未知"
+  avatar = "/images/avatar.jpg"
+
+[params.search]
+  enable = true
 
 [params.article]
   math = false
@@ -29,17 +32,22 @@ theme = "hugo-theme-stack"
 [params.comments]
   enabled = false
 
+# 首页右侧组件
 [[params.widgets.homepage]]
   type = "search"
-
-[[params.widgets.homepage]]
-  type = "categories"
 
 [[params.widgets.homepage]]
   type = "archives"
 
 [[params.widgets.homepage]]
+  type = "categories"
+
+[[params.widgets.homepage]]
   type = "tag-cloud"
+
+# 文章详情页右侧组件
+[[params.widgets.page]]
+  type = "toc"
 
 [menu]
 

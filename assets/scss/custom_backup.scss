@@ -1,0 +1,1390 @@
+/* ==============================
+   DOITSPACE · custom.scss 清理版
+   说明：
+   1. 本文件按模块整理，避免多段重复覆盖。
+   2. 图片路径默认：
+      - 背景图：static/images/background.jpg
+      - 头像：由 hugo.toml 控制，建议 avatar = "/images/avatar.jpg"
+   3. 主要适配 Hugo Stack 主题。
+   ============================== */
+
+
+/* ==============================
+   0. 全局变量与基础布局
+   ============================== */
+
+:root {
+  --doit-card-radius: 24px;
+  --doit-small-radius: 12px;
+  --doit-pill-radius: 999px;
+  --doit-card-bg: rgba(255, 255, 255, 0.9);
+  --doit-widget-bg: rgba(255, 255, 255, 0.86);
+  --doit-soft-shadow: 0 10px 28px rgba(0, 0, 0, 0.055);
+  --doit-widget-shadow: 0 6px 16px rgba(0, 0, 0, 0.045);
+}
+
+/* 整站背景图 */
+html,
+body {
+  min-height: 100%;
+  background:
+    linear-gradient(
+      rgba(245, 247, 250, 0.82),
+      rgba(245, 247, 250, 0.82)
+    ),
+    url("/images/background.jpg") center center / cover fixed no-repeat !important;
+}
+
+/* 防止主题默认背景盖住背景图 */
+body,
+main,
+.main,
+.main-container,
+.container,
+.page,
+.article-page,
+.article-list,
+.left-sidebar,
+.right-sidebar {
+  background-color: transparent !important;
+}
+
+.main-container {
+  gap: 36px;
+  padding-top: 28px;
+}
+
+
+/* ==============================
+   1. 左侧栏
+   ============================== */
+
+.left-sidebar {
+  position: sticky !important;
+  top: 2rem !important;
+  height: calc(100vh - 4rem) !important;
+  align-self: flex-start !important;
+}
+
+.left-sidebar .sidebar,
+.sidebar {
+  height: auto !important;
+  min-height: auto !important;
+  display: block !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 头像 */
+.sidebar header .site-avatar,
+.sidebar .site-avatar {
+  margin-bottom: 1rem !important;
+}
+
+.sidebar header .site-avatar img,
+.sidebar .site-avatar img {
+  width: 96px !important;
+  height: 96px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 3px solid rgba(255, 255, 255, 0.72) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  transition: transform 0.2s ease;
+}
+
+.sidebar header .site-avatar img:hover,
+.sidebar .site-avatar img:hover {
+  transform: scale(1.03);
+}
+
+/* 站点名与简介 */
+.sidebar header {
+  margin-top: 0 !important;
+  margin-bottom: 2rem !important;
+}
+
+.sidebar header .site-name {
+  font-size: 1.08rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  color: var(--body-text-color) !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.sidebar header .site-description {
+  font-size: 0.9rem !important;
+  line-height: 1.8 !important;
+  opacity: 0.75 !important;
+  max-width: 11rem;
+}
+
+/* 左侧菜单 */
+.sidebar .menu,
+.sidebar ol.menu,
+.sidebar ul.menu {
+  margin-top: 2.2rem !important;
+  margin-bottom: 1.4rem !important;
+}
+
+.sidebar .menu li {
+  margin: 1.05rem 0 !important;
+}
+
+.sidebar .menu li a,
+.sidebar ol.menu li a,
+.sidebar ul.menu li a {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  opacity: 0.78 !important;
+  transition: opacity 0.2s ease, transform 0.2s ease, font-weight 0.2s ease;
+}
+
+.sidebar .menu li a:hover {
+  opacity: 1 !important;
+  font-weight: 600 !important;
+  transform: translateX(2px);
+}
+
+.sidebar .menu li.current a,
+.sidebar .menu li.active a {
+  opacity: 1 !important;
+  font-weight: 700 !important;
+}
+
+/* Dark Mode 区域：保持稳定，不贴底 */
+.sidebar footer,
+.sidebar .site-footer,
+.sidebar .sidebar-footer,
+.sidebar .menu-bottom {
+  position: static !important;
+  margin-top: 1.4rem !important;
+  padding-bottom: 0 !important;
+  width: fit-content !important;
+  max-width: fit-content !important;
+  opacity: 0.76 !important;
+}
+
+
+/* ==============================
+   2. 首页文章卡片
+   ============================== */
+
+.article-list article {
+  border-radius: var(--doit-card-radius) !important;
+  overflow: hidden !important;
+  background: var(--doit-card-bg) !important;
+  box-shadow: var(--doit-soft-shadow) !important;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.article-list article:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.075) !important;
+}
+
+/* 首页封面图 */
+.article-list article .article-image {
+  height: 220px !important;
+  overflow: hidden !important;
+}
+
+.article-list article .article-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 0 !important;
+}
+
+/* 卡片文字区域 */
+.article-list article .article-details {
+  padding: 1.35rem 1.55rem 1.45rem 1.55rem !important;
+}
+
+.article-list article:not(:has(.article-image)) .article-details {
+  padding: 1.6rem 1.6rem 1.55rem 1.6rem !important;
+}
+
+.article-list article .article-category a,
+.article-category a {
+  border-radius: 8px !important;
+  padding: 0.32rem 0.72rem !important;
+  font-size: 0.82rem !important;
+  font-weight: 500 !important;
+}
+
+.article-list article .article-title {
+  margin-top: 0.85rem !important;
+  margin-bottom: 0.45rem !important;
+  font-size: 1.22rem !important;
+  line-height: 1.45 !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.01em;
+}
+
+.article-list article .article-subtitle {
+  margin-top: 0.35rem !important;
+  font-size: 0.92rem !important;
+  line-height: 1.75 !important;
+  opacity: 0.72;
+}
+
+.article-list article footer,
+.article-list article .article-time,
+.article-list article .article-reading-time {
+  margin-top: 1rem !important;
+  font-size: 0.84rem !important;
+  opacity: 0.75;
+}
+
+
+/* ==============================
+   3. 文章详情页
+   ============================== */
+
+.main-article,
+article.main-article {
+  background: var(--doit-card-bg) !important;
+  border-radius: var(--doit-card-radius) !important;
+  box-shadow: var(--doit-soft-shadow) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.main-article .article-header,
+article.main-article .article-header {
+  padding: 1.8rem 2rem 0.8rem 2rem !important;
+}
+
+.main-article .article-content,
+article.main-article .article-content {
+  padding: 1.2rem 2.2rem 2.4rem 2.2rem !important;
+  background: transparent !important;
+}
+
+.main-article .article-image {
+  margin: 0 !important;
+}
+
+.main-article .article-image img {
+  width: 100%;
+  border-radius: 0 !important;
+  object-fit: cover;
+}
+
+.article-title {
+  font-size: 1.7rem;
+  line-height: 1.35;
+}
+
+
+/* ==============================
+   4. 正文排版
+   ============================== */
+
+.article-content {
+  font-size: 1rem !important;
+  line-height: 1.95 !important;
+  letter-spacing: 0.01em;
+}
+
+.article-content p {
+  margin: 1rem 0 1.15rem 0 !important;
+  line-height: 1.95 !important;
+}
+
+.article-content h2 {
+  margin-top: 2.6rem !important;
+  margin-bottom: 1rem !important;
+  padding-left: 0.85rem !important;
+  border-left: 4px solid var(--accent-color) !important;
+  font-size: 1.35rem !important;
+  line-height: 1.5 !important;
+}
+
+.article-content h3 {
+  margin-top: 2rem !important;
+  margin-bottom: 0.8rem !important;
+  font-size: 1.15rem !important;
+  line-height: 1.5 !important;
+}
+
+.article-content ul,
+.article-content ol {
+  margin: 1rem 0 1.2rem 1.4rem !important;
+  padding-left: 1.2rem !important;
+}
+
+.article-content li {
+  margin: 0.35rem 0 !important;
+  line-height: 1.8 !important;
+}
+
+.article-content :not(pre) > code {
+  background: rgba(120, 120, 140, 0.12) !important;
+  color: #c75f7b !important;
+  padding: 0.15rem 0.4rem !important;
+  border-radius: 6px !important;
+  font-size: 0.9em !important;
+}
+
+.article-content img {
+  display: block;
+  max-width: 100%;
+  margin: 1.4rem auto !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+}
+
+.article-content em {
+  color: rgba(80, 85, 90, 0.75);
+}
+
+.article-content hr {
+  margin: 2.6rem auto !important;
+  width: 55%;
+  border: none !important;
+  border-top: 1px solid rgba(120, 120, 120, 0.22) !important;
+}
+
+
+/* ==============================
+   5. 代码块：亮色模式浅色化
+   ============================== */
+
+[data-scheme="light"] .article-content .highlight,
+[data-scheme="light"] .article-content div.highlight,
+.article-content .highlight {
+  background: #f3f2fb !important;
+  border-radius: 12px !important;
+  box-shadow: none !important;
+  margin: 1.4rem 0 1.8rem 0 !important;
+  overflow: hidden !important;
+}
+
+[data-scheme="light"] .article-content .highlight pre,
+[data-scheme="light"] .article-content pre,
+.article-content .highlight pre {
+  background: #f3f2fb !important;
+  color: #2f3440 !important;
+  border-radius: 12px !important;
+  padding: 1.2rem 1.4rem !important;
+  line-height: 1.75 !important;
+  font-size: 0.92rem !important;
+}
+
+[data-scheme="light"] .article-content .highlight code,
+[data-scheme="light"] .article-content pre code,
+.article-content .highlight code {
+  background: transparent !important;
+  color: #2f3440 !important;
+}
+
+[data-scheme="light"] .article-content .highlight .lnt,
+[data-scheme="light"] .article-content .highlight .ln,
+.article-content .highlight .lnt,
+.article-content .highlight .ln {
+  color: #8d93a6 !important;
+}
+
+[data-scheme="light"] .article-content .copyCodeButton,
+.article-content .copyCodeButton {
+  background: #ffffff !important;
+  color: #222 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* 语法高亮 */
+.article-content .highlight .s,
+.article-content .highlight .s1,
+.article-content .highlight .s2,
+.article-content .highlight .se {
+  color: #e67e22 !important;
+}
+
+.article-content .highlight .k,
+.article-content .highlight .kc,
+.article-content .highlight .kd,
+.article-content .highlight .kn,
+.article-content .highlight .kp,
+.article-content .highlight .kr,
+.article-content .highlight .kt,
+.article-content .highlight .o,
+.article-content .highlight .p {
+  color: #c2185b !important;
+}
+
+.article-content .highlight .n,
+.article-content .highlight .na,
+.article-content .highlight .nb,
+.article-content .highlight .nc,
+.article-content .highlight .nf,
+.article-content .highlight .nt,
+.article-content .highlight .nx {
+  color: #2f3440 !important;
+}
+
+.article-content .highlight .c,
+.article-content .highlight .c1,
+.article-content .highlight .cm {
+  color: #7a8499 !important;
+  font-style: italic;
+}
+
+.article-content .highlight .m,
+.article-content .highlight .mi,
+.article-content .highlight .mf {
+  color: #5e6ad2 !important;
+}
+
+
+/* ==============================
+   6. Shortcodes：提示框、时间轴、折叠块
+   ============================== */
+
+.custom-notice {
+  margin: 1.5rem 0 !important;
+  padding: 1rem 1.25rem !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  color: var(--body-text-color) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.055) !important;
+  line-height: 1.8 !important;
+  border: none !important;
+}
+
+.custom-notice p,
+.custom-notice span,
+.custom-notice a {
+  color: var(--body-text-color) !important;
+}
+
+.custom-timeline {
+  margin: 2rem 0 !important;
+  padding: 1.2rem 0 !important;
+  background: transparent !important;
+}
+
+.timeline-item {
+  display: grid !important;
+  grid-template-columns: 120px 24px 1fr;
+  column-gap: 1rem;
+  position: relative;
+  min-height: 90px;
+  background: transparent !important;
+}
+
+.timeline-date {
+  text-align: right;
+  font-size: 0.95rem;
+  color: rgba(40, 45, 50, 0.78) !important;
+  padding-top: 0.15rem;
+}
+
+.timeline-dot {
+  position: relative;
+  width: 24px;
+}
+
+.timeline-dot::before {
+  content: "";
+  position: absolute;
+  top: 0.45rem;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #c8e5f5 !important;
+  z-index: 2;
+}
+
+.timeline-dot::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: -1rem;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: #d9edf7 !important;
+}
+
+.timeline-content {
+  padding-bottom: 2rem;
+  background: transparent !important;
+}
+
+.timeline-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.08rem;
+  color: var(--body-text-color) !important;
+}
+
+.timeline-content p {
+  margin: 0;
+  color: rgba(40, 45, 50, 0.72) !important;
+  line-height: 1.7;
+}
+
+.custom-fold {
+  margin: 1.4rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.045);
+}
+
+.custom-fold summary {
+  cursor: pointer;
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+}
+
+.custom-fold-content {
+  padding: 0.2rem 1rem 1rem 1rem;
+}
+
+
+/* ==============================
+   7. 右侧栏：归档、分类、标签
+   ============================== */
+
+.right-sidebar,
+aside.right-sidebar {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  top: 2rem !important;
+}
+
+.right-sidebar .widget:not(:has(#TableOfContents)) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin-bottom: 0.2rem !important;
+}
+
+/* 模块分界线 */
+.right-sidebar .widget:not(:last-child)::after {
+  content: "";
+  display: block;
+  width: 86px;
+  height: 1px;
+  margin: 1.55rem 0 1.45rem 0.15rem;
+  background: rgba(80, 85, 90, 0.28);
+}
+
+/* 标题保持英文原样，但去掉胶囊 */
+.right-sidebar .widget:not(:has(#TableOfContents)) header,
+.right-sidebar .widget:not(:has(#TableOfContents)) .widget-header,
+.right-sidebar .widget-title,
+.right-sidebar .widget h2,
+.right-sidebar .widget h3 {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 0 0.75rem 0.15rem !important;
+  width: auto !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+.right-sidebar .widget:not(:has(#TableOfContents)) .widget-title,
+.right-sidebar .widget:not(:has(#TableOfContents)) h2,
+.right-sidebar .widget:not(:has(#TableOfContents)) h3 {
+  display: block !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0.04em !important;
+  color: rgba(70, 75, 80, 0.78) !important;
+}
+
+/* 普通右侧模块标题不要伪元素 */
+.right-sidebar .widget:not(:has(#TableOfContents)) .widget-title::before,
+.right-sidebar .widget:not(:has(#TableOfContents)) .widget-title::after,
+.right-sidebar .widget:not(:has(#TableOfContents)) h2::before,
+.right-sidebar .widget:not(:has(#TableOfContents)) h2::after,
+.right-sidebar .widget:not(:has(#TableOfContents)) h3::before,
+.right-sidebar .widget:not(:has(#TableOfContents)) h3::after {
+  content: none !important;
+  display: none !important;
+}
+
+.right-sidebar .widget:not(:has(#TableOfContents)) ul,
+.right-sidebar .widget:not(:has(#TableOfContents)) ol {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+/* 归档、分类、标签按钮 */
+.right-sidebar .widget:not(:has(#TableOfContents)) li,
+.right-sidebar .widget:not(:has(#TableOfContents)) a,
+.right-sidebar .tagCloud a,
+.right-sidebar .tagCloud-tags a,
+.right-sidebar .categories-cloud a {
+  border-radius: var(--doit-pill-radius) !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+  box-shadow: var(--doit-widget-shadow) !important;
+  border: none !important;
+  color: var(--body-text-color) !important;
+}
+
+.right-sidebar .widget:not(:has(#TableOfContents)) li {
+  padding: 0 !important;
+  margin-bottom: 0.65rem !important;
+}
+
+.right-sidebar .widget:not(:has(#TableOfContents)) li > a,
+.right-sidebar .widget:not(:has(#TableOfContents)) > a {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.58rem 0.95rem !important;
+  min-height: 2.25rem !important;
+  font-size: 0.88rem !important;
+  text-decoration: none !important;
+}
+
+.right-sidebar .tagCloud,
+.right-sidebar .tagCloud-tags,
+.right-sidebar .categories-cloud,
+.right-sidebar .widget-list--categories {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.65rem 0.75rem !important;
+}
+
+.right-sidebar .tagCloud a,
+.right-sidebar .tagCloud-tags a,
+.right-sidebar .categories-cloud a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0.45rem 0.9rem !important;
+  min-height: 2.1rem !important;
+  margin: 0.25rem 0.35rem 0.25rem 0 !important;
+  font-size: 0.86rem !important;
+  text-decoration: none !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.right-sidebar .widget:not(:has(#TableOfContents)) a:hover,
+.right-sidebar .tagCloud a:hover,
+.right-sidebar .tagCloud-tags a:hover,
+.right-sidebar .categories-cloud a:hover {
+  transform: translateY(-2px);
+  opacity: 1 !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.065) !important;
+}
+
+
+/* ==============================
+   8. 右侧栏：文章目录 TOC
+   ============================== */
+
+.right-sidebar .widget:has(#TableOfContents) {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border: none !important;
+  border-radius: 22px !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1rem 1rem 1.1rem 1rem !important;
+  overflow: hidden;
+  top: 2rem !important;
+  max-height: calc(100vh - 4rem) !important;
+}
+
+.right-sidebar .widget:has(#TableOfContents) .widget-title {
+  font-size: 0 !important;
+  line-height: 1.4rem !important;
+  height: 1.4rem !important;
+  margin: 0 0 0.75rem 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.right-sidebar .widget:has(#TableOfContents) .widget-title::before {
+  content: none !important;
+  display: none !important;
+}
+
+.right-sidebar .widget:has(#TableOfContents) .widget-title::after {
+  content: "目录" !important;
+  display: inline-block !important;
+  font-size: 1rem !important;
+  line-height: 1.4rem !important;
+  font-weight: 700 !important;
+  color: var(--body-text-color) !important;
+  margin-left: 0.9rem !important;
+}
+
+.right-sidebar #TableOfContents {
+  max-height: calc(100vh - 6rem) !important;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+  background: transparent !important;
+}
+
+.right-sidebar #TableOfContents ul,
+.right-sidebar #TableOfContents ol {
+  list-style: none !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+}
+
+.right-sidebar #TableOfContents li {
+  position: relative;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem;
+  margin: 0.65rem 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+.right-sidebar #TableOfContents li::before {
+  content: "";
+  flex: 0 0 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.right-sidebar #TableOfContents li > a {
+  flex: 1 1 auto;
+  display: block !important;
+  min-width: 0;
+  padding: 0.72rem 1rem !important;
+  border-radius: var(--doit-pill-radius) !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.028) !important;
+  border: none !important;
+  color: var(--body-text-color) !important;
+  text-decoration: none !important;
+  font-size: 0.86rem !important;
+  line-height: 1.45 !important;
+  opacity: 0.78;
+  white-space: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+.right-sidebar #TableOfContents a.active,
+.right-sidebar #TableOfContents a.current,
+.right-sidebar #TableOfContents .active > a,
+.right-sidebar #TableOfContents .current > a {
+  font-weight: 700 !important;
+  opacity: 1 !important;
+  transform: none !important;
+  margin-left: 0 !important;
+}
+
+.right-sidebar #TableOfContents li > a:hover {
+  transform: none !important;
+  opacity: 1;
+}
+
+.right-sidebar #TableOfContents li ul,
+.right-sidebar #TableOfContents li ol {
+  width: 100%;
+  margin-top: 0.45rem !important;
+  padding-left: 1.2rem !important;
+}
+
+.right-sidebar #TableOfContents::-webkit-scrollbar {
+  width: 6px;
+}
+
+.right-sidebar #TableOfContents::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: var(--doit-pill-radius);
+}
+
+
+/* ==============================
+   9. 分类、标签、归档等列表页
+   ============================== */
+
+.article-list--compact,
+.term-list,
+.taxonomy-list {
+  border-radius: 22px !important;
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.05) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.article-list--compact article,
+.term-list article,
+.taxonomy-list article {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(120, 120, 120, 0.12) !important;
+  padding: 1.15rem 1.35rem !important;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.article-list--compact article:last-child,
+.term-list article:last-child,
+.taxonomy-list article:last-child {
+  border-bottom: none !important;
+}
+
+.article-list--compact article:hover,
+.term-list article:hover,
+.taxonomy-list article:hover {
+  background: rgba(255, 255, 255, 0.45) !important;
+  transform: translateX(3px);
+}
+
+.article-list--compact article .article-title,
+.term-list article .article-title,
+.taxonomy-list article .article-title {
+  font-size: 1.15rem !important;
+  line-height: 1.45 !important;
+  font-weight: 700 !important;
+}
+
+.article-list--compact article .article-subtitle,
+.term-list article .article-subtitle,
+.taxonomy-list article .article-subtitle {
+  font-size: 0.9rem !important;
+  opacity: 0.68 !important;
+}
+
+
+/* ==============================
+   10. 404 页面
+   ============================== */
+
+.custom-404 {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: var(--doit-card-radius) !important;
+  box-shadow: var(--doit-soft-shadow) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.custom-404-content {
+  padding: 4rem 2rem !important;
+  text-align: center;
+}
+
+.custom-404-code {
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  opacity: 0.18;
+  line-height: 1;
+}
+
+.custom-404-content h1 {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+}
+
+.custom-404-content p {
+  margin: 1rem auto 1.8rem auto;
+  max-width: 28rem;
+  opacity: 0.72;
+  line-height: 1.8;
+}
+
+.custom-404-button {
+  display: inline-block;
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--doit-pill-radius);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  text-decoration: none !important;
+  color: var(--body-text-color) !important;
+}
+
+.custom-404-button:hover {
+  transform: translateY(-2px);
+}
+
+
+/* ==============================
+   11. 暗色模式
+   ============================== */
+
+[data-scheme="dark"] html,
+[data-scheme="dark"] body {
+  background:
+    linear-gradient(
+      rgba(10, 12, 16, 0.62),
+      rgba(10, 12, 16, 0.62)
+    ),
+    url("/images/background.jpg") center center / cover fixed no-repeat !important;
+}
+
+[data-scheme="dark"] .sidebar header .site-name,
+[data-scheme="dark"] .sidebar .menu li a {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+[data-scheme="dark"] .sidebar header .site-description {
+  color: rgba(255, 255, 255, 0.68) !important;
+}
+
+[data-scheme="dark"] .sidebar header .site-avatar img,
+[data-scheme="dark"] .sidebar .site-avatar img {
+  border: 3px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.32) !important;
+}
+
+[data-scheme="dark"] .article-list article,
+[data-scheme="dark"] .main-article,
+[data-scheme="dark"] article.main-article,
+[data-scheme="dark"] .custom-404 {
+  background: rgba(28, 30, 34, 0.78) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28) !important;
+}
+
+[data-scheme="dark"] .article-content :not(pre) > code {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #ffb4c8 !important;
+}
+
+[data-scheme="dark"] .article-content img {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+[data-scheme="dark"] .article-content hr {
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-scheme="dark"] .custom-notice {
+  background: rgba(255, 255, 255, 0.10) !important;
+  color: rgba(255, 255, 255, 0.86) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22) !important;
+}
+
+[data-scheme="dark"] .custom-notice p,
+[data-scheme="dark"] .custom-notice span,
+[data-scheme="dark"] .custom-notice a {
+  color: rgba(255, 255, 255, 0.86) !important;
+}
+
+[data-scheme="dark"] .custom-timeline,
+[data-scheme="dark"] .timeline-item,
+[data-scheme="dark"] .timeline-content {
+  background: transparent !important;
+}
+
+[data-scheme="dark"] .timeline-date {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+
+[data-scheme="dark"] .timeline-dot::before {
+  background: rgba(210, 235, 250, 0.9) !important;
+}
+
+[data-scheme="dark"] .timeline-dot::after {
+  background: rgba(210, 235, 250, 0.42) !important;
+}
+
+[data-scheme="dark"] .timeline-content h3 {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+[data-scheme="dark"] .timeline-content p {
+  color: rgba(255, 255, 255, 0.68) !important;
+}
+
+[data-scheme="dark"] .right-sidebar .widget:not(:has(#TableOfContents)) .widget-title,
+[data-scheme="dark"] .right-sidebar .widget:not(:has(#TableOfContents)) h2,
+[data-scheme="dark"] .right-sidebar .widget:not(:has(#TableOfContents)) h3 {
+  color: rgba(255, 255, 255, 0.76) !important;
+}
+
+[data-scheme="dark"] .right-sidebar .widget:not(:has(#TableOfContents)) li,
+[data-scheme="dark"] .right-sidebar .widget:not(:has(#TableOfContents)) a,
+[data-scheme="dark"] .right-sidebar .tagCloud a,
+[data-scheme="dark"] .right-sidebar .tagCloud-tags a,
+[data-scheme="dark"] .right-sidebar .categories-cloud a {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: rgba(255, 255, 255, 0.86) !important;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18) !important;
+}
+
+[data-scheme="dark"] .right-sidebar .widget:not(:last-child)::after {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+[data-scheme="dark"] .right-sidebar .widget:has(#TableOfContents) {
+  background: rgba(28, 30, 34, 0.72) !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24) !important;
+}
+
+[data-scheme="dark"] .right-sidebar .widget:has(#TableOfContents) .widget-title::after {
+  color: rgba(255, 255, 255, 0.86) !important;
+}
+
+[data-scheme="dark"] .right-sidebar #TableOfContents li::before {
+  background: rgba(255, 255, 255, 0.62);
+}
+
+[data-scheme="dark"] .right-sidebar #TableOfContents li > a {
+  background: rgba(255, 255, 255, 0.10) !important;
+  color: rgba(255, 255, 255, 0.86) !important;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18) !important;
+}
+
+[data-scheme="dark"] .right-sidebar #TableOfContents a.active,
+[data-scheme="dark"] .right-sidebar #TableOfContents a.current,
+[data-scheme="dark"] .right-sidebar #TableOfContents .active > a,
+[data-scheme="dark"] .right-sidebar #TableOfContents .current > a {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-weight: 700 !important;
+}
+
+[data-scheme="dark"] .article-list--compact,
+[data-scheme="dark"] .term-list,
+[data-scheme="dark"] .taxonomy-list {
+  background: rgba(28, 30, 34, 0.76) !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.25) !important;
+}
+
+[data-scheme="dark"] .article-list--compact article,
+[data-scheme="dark"] .term-list article,
+[data-scheme="dark"] .taxonomy-list article {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-scheme="dark"] .article-list--compact article:hover,
+[data-scheme="dark"] .term-list article:hover,
+[data-scheme="dark"] .taxonomy-list article:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-scheme="dark"] .custom-404-button {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+
+/* ==============================
+   12. 移动端适配
+   ============================== */
+
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll !important;
+  }
+
+  .main-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    gap: 1.2rem !important;
+  }
+
+  .left-sidebar,
+  .sidebar {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: auto !important;
+    padding: 1rem 0 !important;
+  }
+
+  .sidebar header .site-avatar img,
+  .sidebar .site-avatar img {
+    width: 72px !important;
+    height: 72px !important;
+  }
+
+  .sidebar header .site-name {
+    font-size: 1rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  .sidebar header .site-description {
+    font-size: 0.85rem !important;
+    line-height: 1.7 !important;
+    max-width: 100% !important;
+  }
+
+  .sidebar .menu,
+  .sidebar ol.menu,
+  .sidebar ul.menu {
+    margin-top: 1.2rem !important;
+  }
+
+  .sidebar .menu li {
+    margin: 0.55rem 0 !important;
+  }
+
+  .sidebar .menu li a {
+    font-size: 0.92rem !important;
+  }
+
+  .sidebar footer,
+  .sidebar .site-footer,
+  .sidebar .sidebar-footer,
+  .sidebar .menu-bottom {
+    margin-top: 1rem !important;
+  }
+
+  .article-list article {
+    border-radius: 18px !important;
+  }
+
+  .article-list article .article-image {
+    height: 165px !important;
+  }
+
+  .article-list article .article-details {
+    padding: 1.1rem 1.15rem 1.2rem 1.15rem !important;
+  }
+
+  .article-list article .article-title {
+    font-size: 1.08rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .article-list article .article-subtitle {
+    font-size: 0.88rem !important;
+    line-height: 1.7 !important;
+  }
+
+  .article-list article footer,
+  .article-list article .article-time,
+  .article-list article .article-reading-time {
+    font-size: 0.8rem !important;
+  }
+
+  .main-article {
+    border-radius: 18px !important;
+  }
+
+  .main-article .article-header {
+    padding: 1.3rem 1.2rem 0.5rem 1.2rem !important;
+  }
+
+  .main-article .article-content {
+    padding: 0.8rem 1.2rem 1.6rem 1.2rem !important;
+  }
+
+  .article-title {
+    font-size: 1.35rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .article-content {
+    font-size: 0.96rem !important;
+    line-height: 1.85 !important;
+  }
+
+  .article-content h2 {
+    font-size: 1.18rem !important;
+    margin-top: 2rem !important;
+  }
+
+  .article-content h3 {
+    font-size: 1.05rem !important;
+  }
+
+  .article-content .highlight,
+  .article-content pre {
+    overflow-x: auto !important;
+    border-radius: 12px !important;
+  }
+
+  .article-content pre,
+  .article-content pre code {
+    font-size: 0.82rem !important;
+    white-space: pre !important;
+  }
+
+  .article-content img {
+    border-radius: 10px !important;
+    margin: 1rem auto !important;
+  }
+
+  .right-sidebar {
+    display: none !important;
+  }
+
+  .article-list--compact,
+  .term-list,
+  .taxonomy-list {
+    border-radius: 18px !important;
+  }
+
+  .article-list--compact article,
+  .term-list article,
+  .taxonomy-list article {
+    padding: 1rem 1.1rem !important;
+  }
+
+  .custom-notice {
+    font-size: 0.92rem !important;
+    padding: 0.85rem 1rem !important;
+    border-radius: 10px !important;
+  }
+
+  .timeline-item {
+    grid-template-columns: 72px 18px 1fr !important;
+    column-gap: 0.55rem !important;
+  }
+
+  .timeline-date {
+    font-size: 0.78rem !important;
+  }
+
+  .timeline-content h3 {
+    font-size: 0.95rem !important;
+  }
+
+  .timeline-content p {
+    font-size: 0.86rem !important;
+  }
+}
+/* ==============================
+   DOITSPACE · 字号整体回调
+   解决整理后字体偏小问题
+   ============================== */
+
+/* 全站基础字号 */
+html {
+  font-size: 16px !important;
+}
+
+/* 左侧栏 */
+.sidebar header .site-name {
+  font-size: 1.12rem !important;
+}
+
+.sidebar header .site-description {
+  font-size: 0.9rem !important;
+  line-height: 1.75 !important;
+}
+
+.sidebar .menu li a {
+  font-size: 1rem !important;
+}
+
+/* 首页文章卡片标题 */
+.article-list article .article-title {
+  font-size: 1.28rem !important;
+  line-height: 1.45 !important;
+}
+
+/* 首页文章摘要 */
+.article-list article .article-subtitle {
+  font-size: 0.95rem !important;
+  line-height: 1.75 !important;
+}
+
+/* 首页文章元信息 */
+.article-list article footer,
+.article-list article .article-time,
+.article-list article .article-reading-time {
+  font-size: 0.88rem !important;
+}
+
+/* 分类标签胶囊 */
+.article-list article .article-category a,
+.article-category a {
+  font-size: 0.85rem !important;
+}
+
+/* 文章页标题 */
+.main-article .article-title,
+.article-title {
+  font-size: 1.7rem !important;
+  line-height: 1.35 !important;
+}
+
+/* 文章页副标题/描述 */
+.main-article .article-subtitle,
+.article-subtitle {
+  font-size: 1rem !important;
+  line-height: 1.75 !important;
+}
+
+/* 正文 */
+.article-content {
+  font-size: 1rem !important;
+  line-height: 1.95 !important;
+}
+
+/* 正文段落 */
+.article-content p,
+.article-content li {
+  font-size: 1rem !important;
+  line-height: 1.95 !important;
+}
+
+/* 正文二级标题 */
+.article-content h2 {
+  font-size: 1.38rem !important;
+  line-height: 1.5 !important;
+}
+
+/* 正文三级标题 */
+.article-content h3 {
+  font-size: 1.18rem !important;
+  line-height: 1.5 !important;
+}
+
+/* 代码块 */
+.article-content pre,
+.article-content pre code,
+.article-content .highlight pre,
+.article-content .highlight code {
+  font-size: 0.9rem !important;
+  line-height: 1.75 !important;
+}
+
+/* 行内代码 */
+.article-content :not(pre) > code {
+  font-size: 0.92em !important;
+}
+
+/* 右侧栏标题 */
+.right-sidebar .widget-title,
+.right-sidebar .widget h2,
+.right-sidebar .widget h3 {
+  font-size: 0.9rem !important;
+}
+
+/* 右侧栏按钮、标签、归档 */
+.right-sidebar .widget:not(:has(#TableOfContents)) a,
+.right-sidebar .tagCloud a,
+.right-sidebar .tagCloud-tags a,
+.right-sidebar .categories-cloud a,
+.right-sidebar .widget-list--archives a {
+  font-size: 0.88rem !important;
+}
+
+/* 右侧文章目录 */
+.right-sidebar #TableOfContents li > a {
+  font-size: 0.86rem !important;
+  line-height: 1.55 !important;
+}
+
+/* 页脚 */
+.site-footer {
+  font-size: 0.82rem !important;
+}

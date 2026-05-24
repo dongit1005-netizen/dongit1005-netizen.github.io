@@ -1,0 +1,6 @@
+<details class="custom-fold">
+  <summary>{{ .Get "title" | default "展开查看" }}</summary>
+  <div class="custom-fold-content">
+    {{ .Inner | markdownify }}
+  </div>
+</details>
