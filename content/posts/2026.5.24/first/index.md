@@ -1,36 +1,31 @@
 +++  
 title = 'Hugo + GitHub Pages + Obsidian 博客搭建流程'  
-date = '2026-05-23T23:30:00+08:00'  
+date = '2026-05-24T00:00:00+08:00'  
 draft = false  
 categories = ['Build']  
 tags = ['Hugo', 'GitHub Pages', 'Obsidian', 'Stack']  
-description = '记录 Hugo 博客从本地搭建、GitHub Pages 部署、Obsidian 写作流到 Stack 主题更换的完整流程。'  
-image = 'cover.png'  
+description = '记录 Hugo 博客从本地搭建、GitHub Pages 部署、Obsidian 写作流、Stack 主题更换到页面美化的完整流程。'  
+image = "cover.png"
 +++
 
 ## 一、整体方案
 
-本博客采用 Hugo + GitHub Pages + Obsidian 的方案搭建。
+本博客采用 **Hugo + GitHub Pages + Obsidian + Stack** 的方案搭建。
 
-整体逻辑如下：
+各部分的作用如下：
 
-```text
-Hugo：负责生成静态博客网站
-GitHub Pages：负责把网站发布到线上
-GitHub Actions：负责自动构建和部署
-Obsidian：负责日常写作和文章管理
-Stack：负责博客主题和页面样式
-```
+- **Hugo**：负责生成静态博客网站。
+    
+- **GitHub Pages**：负责将网站发布到线上。
+    
+- **GitHub Actions**：负责自动构建和部署。
+    
+- **Obsidian**：负责日常写作和文章管理。
+    
+- **Stack**：负责博客主题和页面样式。
+    
 
-最终形成的工作流是：
-
-```text
-Obsidian 写文章
-Hugo 本地预览
-Git 提交修改
-GitHub Actions 自动部署
-GitHub Pages 线上更新
-```
+最终形成的工作流是：在 **Obsidian** 中写文章，在 **Hugo** 中本地预览，通过 **Git** 提交修改，再由 **GitHub Actions** 自动部署到 **GitHub Pages**。
 
 ## 二、安装基础工具
 
@@ -79,7 +74,7 @@ cd myblog
 git init
 ```
 
-此时博客项目的基本结构已经生成，主要文件和文件夹包括：
+此时博客项目的基本结构已经生成：
 
 ```text
 myblog/
@@ -93,7 +88,9 @@ myblog/
   hugo.toml
 ```
 
-## 四、安装主题
+其中，`content` 用来存放文章，`themes` 用来存放主题，`hugo.toml` 是整个博客的配置文件。
+
+## 四、安装基础主题并测试运行
 
 最开始可以先使用 PaperMod 主题测试博客是否能正常运行。
 
@@ -163,23 +160,11 @@ description = '这是我的第一篇博客。'
 以后我会在这里记录学习笔记、项目经历、读书笔记和阶段性思考。
 ```
 
-其中：
-
-```toml
-draft = false
-```
-
-表示文章正式发布。如果是：
-
-```toml
-draft = true
-```
-
-则表示文章仍是草稿。
+其中，`draft = false` 表示文章正式发布；如果是 `draft = true`，则表示文章仍是草稿。
 
 ## 六、部署到 GitHub Pages
 
-在 GitHub 上新建仓库，仓库名必须是：
+在 GitHub 上新建仓库，仓库名需要设置为：
 
 ```text
 GitHub用户名.github.io
@@ -232,7 +217,7 @@ git remote -v
 
 ## 七、配置 GitHub Actions 自动部署
 
-在项目根目录下创建文件夹：
+在项目根目录下创建部署文件夹：
 
 ```powershell
 mkdir .github
@@ -308,17 +293,7 @@ git commit -m "add deploy workflow"
 git push
 ```
 
-然后进入 GitHub 仓库：
-
-```text
-Settings → Pages
-```
-
-在 `Build and deployment` 中，将 `Source` 设置为：
-
-```text
-GitHub Actions
-```
+然后进入 GitHub 仓库的 `Settings → Pages`，在 `Build and deployment` 中将 `Source` 设置为 `GitHub Actions`。
 
 之后每次执行 `git push`，GitHub Actions 都会自动构建并部署博客。
 
@@ -360,13 +335,7 @@ git push
 
 为了获得更舒适的写作体验，可以使用 Obsidian 作为博客文章编辑器。
 
-在 Obsidian 中选择：
-
-```text
-打开本地文件夹作为仓库
-```
-
-打开 Hugo 项目中的 `content` 文件夹：
+在 Obsidian 中选择“打开本地文件夹作为仓库”，打开 Hugo 项目中的 `content` 文件夹：
 
 ```text
 C:\Users\lenovo\Desktop\myblog\content
@@ -374,18 +343,12 @@ C:\Users\lenovo\Desktop\myblog\content
 
 这样 Obsidian 中只会显示文章内容，不会显示主题、部署文件和配置文件。
 
-建议在 Obsidian 中进行以下设置：
+建议在 Obsidian 中进入 `设置 → 文件与链接`，进行如下配置：
 
-```text
-设置 → 文件与链接
-```
-
-推荐配置：
-
-```text
-使用 Wiki 链接：关闭
-新附件的默认位置：当前文件所在文件夹
-```
+- 关闭“使用 Wiki 链接”。
+    
+- 将“新附件的默认位置”设置为“当前文件所在文件夹”。
+    
 
 这样插入图片时，更适合 Hugo 识别。
 
@@ -400,27 +363,16 @@ content/
   posts/
     article-name/
       index.md
-      cover.jpg
+      cover.png
       01.png
       02.png
 ```
 
-在 Obsidian 中操作时，需要注意：
+在 Obsidian 中操作时，需要先在 `posts` 下新建文章文件夹，再在文件夹中新建名为 `index` 的笔记。
 
-```text
-新建文章文件夹：article-name
-在文件夹中新建笔记：index
-```
+注意，不要在 Obsidian 里新建 `index.md`，因为 Obsidian 会自动补 `.md` 后缀。只需要创建名为 `index` 的笔记即可，最终文件会是 `index.md`。
 
-不要在 Obsidian 里新建 `index.md`，因为 Obsidian 会自动补 `.md` 后缀。只需要创建名为 `index` 的笔记即可，最终文件会是：
-
-```text
-index.md
-```
-
-文章中的图片和 `index.md` 放在同一个文件夹中。
-
-插入图片时使用标准 Markdown 格式：
+文章中的图片和 `index.md` 放在同一个文件夹中。插入图片时使用标准 Markdown 格式：
 
 ```markdown
 ![图片说明](01.png)
@@ -432,17 +384,17 @@ index.md
 ![[01.png]]
 ```
 
-一篇文章的完整示例：
+一篇文章的基本结构示例如下：
 
 ```markdown
 +++
 title = '我的博客搭建记录'
-date = '2026-05-23T23:00:00+08:00'
+date = '2026-05-24T00:00:00+08:00'
 draft = false
 categories = ['博客']
 tags = ['Hugo', 'Obsidian']
 description = '记录 Hugo 博客搭建过程。'
-image = 'cover.jpg'
+image = 'cover.png'
 +++
 
 ## 前言
@@ -476,13 +428,7 @@ hugo server -D --disableFastRender --ignoreCache
 http://localhost:1313/
 ```
 
-其中：
-
-```text
-localhost:1313
-```
-
-是本地预览地址，必须保持 Hugo 服务运行才能访问。
+其中，`localhost:1313` 是本地预览地址，必须保持 Hugo 服务运行才能访问。
 
 线上地址是：
 
@@ -510,14 +456,6 @@ git push
 
 等待 GitHub Actions 变成绿色对勾后，线上博客会自动更新。
 
-常用发布流程可以简化为：
-
-```powershell
-git add .
-git commit -m "update blog"
-git push
-```
-
 ## 十三、更换 Stack 主题
 
 后续将主题从 PaperMod 更换为 Stack。
@@ -540,7 +478,7 @@ git submodule add --depth=1 https://github.com/CaiJimmy/hugo-theme-stack.git the
 theme = "hugo-theme-stack"
 ```
 
-Stack 的基础配置示例：
+Stack 的基础配置示例如下：
 
 ```toml
 baseURL = "https://dongit1005-netizen.github.io/"
@@ -663,7 +601,7 @@ hugo new about.md
 ```markdown
 +++
 title = '关于'
-date = '2026-05-23T23:30:00+08:00'
+date = '2026-05-24T00:00:00+08:00'
 draft = false
 +++
 
@@ -680,29 +618,297 @@ git commit -m "add archives and about pages"
 git push
 ```
 
-## 十五、最终工作流
+## 十五、自定义 Stack 样式
 
-最终，博客的日常使用流程如下。
-
-写文章：
+Stack 主题支持通过自定义 SCSS 进行轻量美化。自定义样式不要写进 `.github/workflows/hugo.yaml`，而应放在：
 
 ```text
-打开 Obsidian
-进入 content/posts
-新建文章文件夹
-在文件夹中创建 index
-写入文章内容
-图片放在同一个文件夹中
+assets/scss/custom.scss
 ```
 
-本地预览：
+如果没有对应文件夹，可以创建：
 
 ```powershell
-cd C:\Users\lenovo\Desktop\myblog
-hugo server -D --disableFastRender --ignoreCache
+mkdir assets -Force
+mkdir assets\scss -Force
+notepad assets\scss\custom.scss
 ```
 
-发布上线：
+可以在 `custom.scss` 中调整页面卡片、代码块、图片、引用块等样式。
+
+例如，代码块间距可以通过如下样式调整：
+
+```scss
+.article-content .highlight {
+  margin: 1.4rem 0 1.8rem 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.article-content .highlight pre,
+.article-content pre {
+  padding: 1.2rem 1.4rem;
+  border-radius: 14px;
+  line-height: 1.7;
+}
+
+.article-content pre code {
+  white-space: pre;
+}
+```
+
+需要注意，`.github/workflows/hugo.yaml` 只用于 GitHub Actions 部署，不能写入 CSS 或 SCSS 样式。自定义样式统一放在 `assets/scss/custom.scss` 中。
+
+## 十六、清理 Hugo 自动生成文件
+
+Hugo 本地构建时会生成 `public/` 和 `resources/` 文件夹。这些文件通常不需要提交到 GitHub，因为 GitHub Actions 会在线上重新生成。
+
+在博客根目录新建或打开 `.gitignore`：
+
+```powershell
+notepad .gitignore
+```
+
+写入：
+
+```gitignore
+public/
+resources/
+.hugo_build.lock
+```
+
+然后让 Git 停止跟踪这些已生成文件：
+
+```powershell
+git rm -r --cached public resources
+```
+
+如果其中某个文件夹不存在，可以分别执行：
+
+```powershell
+git rm -r --cached public
+git rm -r --cached resources
+```
+
+之后提交：
+
+```powershell
+git add .gitignore
+git commit -m "ignore hugo generated files"
+git push
+```
+
+以后主要提交文章、配置、主题样式和部署文件，不再提交 Hugo 自动生成的构建产物。
+
+## 十七、添加提示框和时间轴组件
+
+为了让关于页或维护日志更有层次，可以通过 Hugo shortcode 添加提示框和时间轴组件。
+
+首先创建 shortcode 文件夹：
+
+```powershell
+mkdir layouts -Force
+mkdir layouts\shortcodes -Force
+```
+
+创建提示框组件：
+
+```powershell
+notepad layouts\shortcodes\notice.html
+```
+
+写入：
+
+```html
+<div class="custom-notice">
+  {{ .Inner | markdownify }}
+</div>
+```
+
+创建时间轴外壳：
+
+```powershell
+notepad layouts\shortcodes\timeline.html
+```
+
+写入：
+
+```html
+<div class="custom-timeline">
+  {{ .Inner }}
+</div>
+```
+
+创建时间轴单项：
+
+```powershell
+notepad layouts\shortcodes\timeline-item.html
+```
+
+写入：
+
+```html
+<div class="timeline-item">
+  <div class="timeline-date">{{ .Get "date" }}</div>
+  <div class="timeline-dot"></div>
+  <div class="timeline-content">
+    <h3>{{ .Get "title" }}</h3>
+    <p>{{ .Inner | markdownify }}</p>
+  </div>
+</div>
+```
+
+然后在 `assets/scss/custom.scss` 中加入样式：
+
+```scss
+.custom-notice {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+  background: var(--card-background);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  line-height: 1.8;
+}
+
+.custom-timeline {
+  margin: 2rem 0;
+  padding: 1rem 0;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 120px 24px 1fr;
+  column-gap: 1rem;
+  position: relative;
+  min-height: 90px;
+}
+
+.timeline-date {
+  text-align: right;
+  font-size: 1rem;
+  color: var(--card-text-color-main);
+  padding-top: 0.15rem;
+}
+
+.timeline-dot {
+  position: relative;
+  width: 24px;
+}
+
+.timeline-dot::before {
+  content: "";
+  position: absolute;
+  top: 0.45rem;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #c8e5f5;
+  z-index: 2;
+}
+
+.timeline-dot::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: -1rem;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: #d9edf7;
+}
+
+.timeline-content {
+  padding-bottom: 2rem;
+}
+
+.timeline-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.15rem;
+}
+
+.timeline-content p {
+  margin: 0;
+  color: var(--card-text-color-secondary);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .timeline-item {
+    grid-template-columns: 80px 20px 1fr;
+    column-gap: 0.6rem;
+  }
+
+  .timeline-date {
+    font-size: 0.9rem;
+  }
+
+  .timeline-content h3 {
+    font-size: 1rem;
+  }
+}
+```
+
+之后即可在文章或关于页中使用。
+
+提示框写法：
+
+```markdown
+{{< notice >}}
+这里可以写提示、说明、感谢或补充内容。
+{{< /notice >}}
+```
+
+时间轴写法：
+
+```markdown
+{{< timeline >}}
+
+{{< timeline-item date="2026-05-24" title="更换 Stack 主题" >}}
+完成 Stack 主题更换，并调整基础页面样式。
+{{< /timeline-item >}}
+
+{{< timeline-item date="2026-05-24" title="配置 Obsidian 写作流" >}}
+采用文章包模式，将文章正文和图片放在同一文件夹中。
+{{< /timeline-item >}}
+
+{{< timeline-item date="2026-05-23" title="完成 GitHub Pages 部署" >}}
+配置 GitHub Actions，实现 push 后自动构建和部署。
+{{< /timeline-item >}}
+
+{{< /timeline >}}
+```
+
+## 十八、文章写法整理
+
+为了让文章页面更清爽，普通说明文字不建议放进代码块。
+
+说明类内容适合用普通段落或列表。例如：
+
+- **Hugo**：负责生成静态博客网站。
+    
+- **GitHub Pages**：负责把网站发布到线上。
+    
+- **GitHub Actions**：负责自动构建和部署。
+    
+- **Obsidian**：负责日常写作和文章管理。
+    
+- **Stack**：负责博客主题和页面样式。
+    
+
+真正适合使用代码块的内容包括：
+
+- PowerShell 命令。
+    
+- 文件目录结构。
+    
+- 配置文件内容。
+    
+- Markdown、TOML、YAML、SCSS 等代码。
+    
+
+例如命令可以写成：
 
 ```powershell
 git add .
@@ -710,13 +916,53 @@ git commit -m "update blog"
 git push
 ```
 
-线上检查：
+文件结构可以写成：
+
+```text
+content/
+  posts/
+    article-name/
+      index.md
+      cover.png
+```
+
+配置文件可以写成：
+
+```toml
+baseURL = "https://dongit1005-netizen.github.io/"
+theme = "hugo-theme-stack"
+```
+
+这样文章会更像正式博客，而不是整篇技术说明书。
+
+## 十九、最终工作流
+
+当前博客的日常使用流程如下。
+
+写文章时，打开 Obsidian，进入 `content/posts`，新建文章文件夹，在文件夹中创建 `index`，正文写在 `index.md` 中，图片放在同一个文件夹里。
+
+本地预览时，在 PowerShell 中执行：
+
+```powershell
+cd C:\Users\lenovo\Desktop\myblog
+hugo server -D --disableFastRender --ignoreCache
+```
+
+发布上线时，执行：
+
+```powershell
+git add .
+git commit -m "update blog"
+git push
+```
+
+线上检查地址：
 
 ```text
 https://dongit1005-netizen.github.io/
 ```
 
-## 十六、当前博客结构
+## 二十、当前博客结构
 
 当前博客基本结构如下：
 
@@ -725,41 +971,35 @@ myblog/
   .github/
     workflows/
       hugo.yaml
+  assets/
+    scss/
+      custom.scss
   content/
     posts/
       article-name/
         index.md
-        cover.jpg
+        cover.png
         01.png
     archives.md
     about.md
+  layouts/
+    shortcodes/
+      notice.html
+      timeline.html
+      timeline-item.html
   static/
   themes/
     hugo-theme-stack/
+  .gitignore
   hugo.toml
 ```
 
-其中：
+其中，`content/posts` 存放博客文章，`assets/scss/custom.scss` 存放自定义样式，`layouts/shortcodes` 存放自定义短代码，`hugo.toml` 是博客配置文件，`.github/workflows/hugo.yaml` 是 GitHub Actions 部署文件。
 
-```text
-content/posts/        存放博客文章
-content/about.md      关于页面
-content/archives.md   归档页面
-themes/               存放主题
-hugo.toml             博客配置文件
-.github/workflows/    GitHub Actions 部署配置
-```
-
-## 十七、总结
+## 二十一、总结
 
 至此，博客已经完成了从本地搭建到线上部署的完整流程。
 
-当前方案为：
+当前方案为 **Hugo + GitHub Pages + GitHub Actions + Obsidian + Stack**。
 
-```text
-Hugo + GitHub Pages + GitHub Actions + Obsidian + Stack
-```
-
-Hugo 负责生成网站，GitHub Pages 负责发布，Obsidian 负责写作，Stack 负责页面样式。
-
-后续只需要按照固定流程写作、预览、提交和推送，即可持续更新博客。
+Hugo 负责生成网站，GitHub Pages 负责发布，Obsidian 负责写作，Stack 负责页面样式。后续只需要按照固定流程写作、预览、提交和推送，即可持续更新博客。
