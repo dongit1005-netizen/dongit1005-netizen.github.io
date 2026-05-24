@@ -1,0 +1,82 @@
+/* ===== Stack 轻装修：整体变量 ===== */
+
+:root {
+  --card-border-radius: 20px;
+  --tag-border-radius: 10px;
+  --section-separation: 32px;
+  --main-top-padding: 28px;
+}
+
+/* ===== 页面整体间距 ===== */
+
+.main-container {
+  gap: 36px;
+  padding-top: var(--main-top-padding);
+}
+
+/* ===== 首页文章卡片 ===== */
+
+.article-list article {
+  border-radius: var(--card-border-radius);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.article-list article:hover {
+  transform: translateY(-3px);
+}
+
+/* ===== 文章封面图 ===== */
+
+.article-image img {
+  border-radius: var(--card-border-radius);
+  object-fit: cover;
+}
+
+/* ===== 正文图片 ===== */
+
+.article-content img {
+  border-radius: 14px;
+}
+
+/* ===== 引用块 ===== */
+
+.article-content blockquote {
+  border-left: 4px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  background: var(--card-background);
+}
+
+/* ===== 行内代码 ===== */
+
+.article-content code {
+  border-radius: 6px;
+  padding: 0.15rem 0.35rem;
+}
+
+/* ===== 代码块 ===== */
+
+.article-content pre {
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+/* 代码块整体：控制它和上下正文的距离 */
+.article-content .highlight {
+  margin: 1.4rem 0 1.8rem 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* 代码块内部：控制文字和边界的距离 */
+.article-content .highlight pre,
+.article-content pre {
+  padding: 1.2rem 1.4rem;
+  border-radius: 14px;
+  line-height: 1.7;
+}
+
+/* 防止长命令贴边，允许横向滚动 */
+.article-content pre code {
+  white-space: pre;
+}

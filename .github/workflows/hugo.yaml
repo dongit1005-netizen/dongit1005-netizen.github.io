@@ -1,50 +1,62 @@
-name: Deploy Hugo site to Pages
+/* ===== Stack 轻装修：整体变量 ===== */
 
-on:
-  push:
-    branches:
-      - main
+:root {
+  --card-border-radius: 20px;
+  --tag-border-radius: 10px;
+  --section-separation: 32px;
+  --main-top-padding: 28px;
+}
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+/* ===== 页面整体间距 ===== */
 
-concurrency:
-  group: pages
-  cancel-in-progress: false
+.main-container {
+  gap: 36px;
+  padding-top: var(--main-top-padding);
+}
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
+/* ===== 首页文章卡片 ===== */
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: latest
-          extended: true
+.article-list article {
+  border-radius: var(--card-border-radius);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-      - name: Build
-        run: hugo --gc --minify
+.article-list article:hover {
+  transform: translateY(-3px);
+}
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
+/* ===== 文章封面图 ===== */
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+.article-image img {
+  border-radius: var(--card-border-radius);
+  object-fit: cover;
+}
+
+/* ===== 正文图片 ===== */
+
+.article-content img {
+  border-radius: 14px;
+}
+
+/* ===== 引用块 ===== */
+
+.article-content blockquote {
+  border-left: 4px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  background: var(--card-background);
+}
+
+/* ===== 行内代码 ===== */
+
+.article-content code {
+  border-radius: 6px;
+  padding: 0.15rem 0.35rem;
+}
+
+/* ===== 代码块 ===== */
+
+.article-content pre {
+  border-radius: 14px;
+  padding: 1rem;
+}

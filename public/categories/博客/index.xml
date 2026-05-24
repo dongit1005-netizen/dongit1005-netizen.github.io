@@ -10,6 +10,6 @@
             <link>http://localhost:1313/posts/first-post/</link>
             <pubDate>Sat, 23 May 2026 22:30:00 +0800</pubDate>
             <guid>http://localhost:1313/posts/first-post/</guid>
-            <description>&lt;p&gt;这是我的第一篇博客。&lt;/p&gt;&#xA;&lt;p&gt;以后我可以在这里记录学习笔记、项目经历、读书笔记和阶段性思考&lt;/p&gt;&#xA;</description>
+            <description>&lt;p&gt;这是我的第一篇博客。&lt;/p&gt;&#xA;</description>
         </item></channel>
 </rss>

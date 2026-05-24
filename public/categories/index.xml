@@ -5,7 +5,13 @@
         <description>Recent content in Categories on DOITSPACE</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <lastBuildDate>Sat, 23 May 2026 22:30:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 23 May 2026 23:30:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>Build</title>
+            <link>http://localhost:1313/categories/build/</link>
+            <pubDate>Sat, 23 May 2026 23:30:00 +0800</pubDate>
+            <guid>http://localhost:1313/categories/build/</guid>
+            <description></description>
+        </item><item>
             <title>博客</title>
             <link>http://localhost:1313/categories/%E5%8D%9A%E5%AE%A2/</link>
             <pubDate>Sat, 23 May 2026 22:30:00 +0800</pubDate>
